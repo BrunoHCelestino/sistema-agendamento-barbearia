@@ -2,6 +2,7 @@ package br.com.brunocelestino.agendamento_barbearia.controller;
 
 import br.com.brunocelestino.agendamento_barbearia.data.entity.Cliente;
 import br.com.brunocelestino.agendamento_barbearia.dto.ClienteDto;
+import br.com.brunocelestino.agendamento_barbearia.dto.ClienteUpdateDto;
 import br.com.brunocelestino.agendamento_barbearia.service.ClienteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,11 @@ public class ClienteController {
     public ResponseEntity<Void> createCliente(@Valid @RequestBody ClienteDto cliente){
         clienteService.createCliente(cliente);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PatchMapping("/update-cliente")
+    public ResponseEntity<ClienteDto> updateCliente(@Valid @RequestBody ClienteUpdateDto cliente){
+        return ResponseEntity.ok(clienteService.updateCliente(cliente));
     }
 
     @PatchMapping("/toggle-cliente-status/{email}")

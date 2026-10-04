@@ -23,6 +23,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
     Optional<Cliente> findById(@NonNull UUID id);
 
+    Optional<Cliente> findByEmail(String email);
+
     boolean existsByEmail(String email);
 
     @Modifying
