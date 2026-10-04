@@ -49,7 +49,7 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PatchMapping("/alternar-status-cliente/{email}")
+    @PatchMapping("/toggle-cliente-status/{email}")
     public ResponseEntity<Void> alternarStatusAtivo(@PathVariable String email){
         clienteService.alternarStatusCliente(email);
         return ResponseEntity.status(HttpStatus.OK).build();
