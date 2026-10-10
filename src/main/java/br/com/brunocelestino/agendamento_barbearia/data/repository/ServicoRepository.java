@@ -19,4 +19,5 @@ public interface ServicoRepository extends JpaRepository<Servico, UUID> {
     @Modifying
     @Query(value = "UPDATE servicos SET ativo = NOT ativo WHERE id = :id", nativeQuery = true)
     void toggleServicoStatus(UUID id);
+
 }
