@@ -21,3 +21,13 @@ ___
 | ![PATCH](https://img.shields.io/badge/PATCH-8250df?style=flat-square) | `/v1/barbeiro/toggle-barbeiro-status/{id}` | Ativa/desativa um barbeiro |
 | ![PATCH](https://img.shields.io/badge/PATCH-8250df?style=flat-square) | `/v1/barbeiro/update-barbeiro` | Atualiza telefone do barbeiro |
 
+## Serviço
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| ![GET](https://img.shields.io/badge/GET-0077c0?style=flat-square) | `/v1/servico/find-all` | Lista todos os serviços |
+| ![GET](https://img.shields.io/badge/GET-0077c0?style=flat-square) | `/v1/servico/find-all-activated` | Lista serviços ativos |
+| ![GET](https://img.shields.io/badge/GET-0077c0?style=flat-square) | `/v1/servico/find-all-by-id/{servicoId}` | Busca serviço por ID |
+| ![POST](https://img.shields.io/badge/POST-2ea44f?style=flat-square) | `/v1/servico/create-servico` | Cria um serviço |
+| ![PATCH](https://img.shields.io/badge/PATCH-8250df?style=flat-square) | `/v1/servico/toggle-servico-status/{id}` | Ativa/desativa um serviço |
+| ![PATCH](https://img.shields.io/badge/PATCH-8250df?style=flat-square) | `/v1/servico/update-servico` | Atualiza dados de um serviço |
+

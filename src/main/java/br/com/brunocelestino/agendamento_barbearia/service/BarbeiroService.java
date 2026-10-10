@@ -37,7 +37,8 @@ public class BarbeiroService {
 
     @Transactional
     public BarbeiroDto updateBarbeiro(BarbeiroUpdateDto barbeiroUpdateDto){
-        Barbeiro barbeiro = barbeiroRepository.findByTelefone(barbeiroUpdateDto.telefoneAntigo()).orElseThrow();
+        Barbeiro barbeiro = barbeiroRepository.findByTelefone(barbeiroUpdateDto.telefoneAntigo())
+                .orElseThrow();
 
         barbeiro.setTelefone(barbeiroUpdateDto.telefone());
         barbeiroRepository.save(barbeiro);

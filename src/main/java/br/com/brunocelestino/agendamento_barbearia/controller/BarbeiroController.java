@@ -4,6 +4,8 @@ import br.com.brunocelestino.agendamento_barbearia.data.entity.Barbeiro;
 import br.com.brunocelestino.agendamento_barbearia.dto.BarbeiroDto;
 import br.com.brunocelestino.agendamento_barbearia.dto.BarbeiroUpdateDto;
 import br.com.brunocelestino.agendamento_barbearia.service.BarbeiroService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/v1/barbeiro")
 @RequiredArgsConstructor
+@Tag(
+        name = "Barbeiros",
+        description = "Operações relacionadas ao gerenciamento dos barbeiros"
+)
 public class BarbeiroController {
 
     private final BarbeiroService barbeiroService;
