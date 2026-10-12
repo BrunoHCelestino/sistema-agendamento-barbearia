@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
@@ -18,13 +19,14 @@ import java.time.LocalDateTime;
 public class AgendamentoDto {
 
     private LocalDateTime dataHoraInicio;
-    private LocalDateTime dataHoraFim;
 
-    private Cliente cliente;
+    private UUID clienteId;
 
-    private Barbeiro barbeiro;
+    private UUID barbeiroId;
 
-    private Servico servico;
+    private UUID servicoId;
+
+    private String observacao;
 
     private BigDecimal precoCobrado;
 
