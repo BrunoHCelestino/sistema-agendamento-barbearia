@@ -40,4 +40,12 @@ public class Agendamento {
 
     private BigDecimal precoCobrado;
 
+    public void confirmAgendamento(){
+        this.status = StatusAgendamento.CONFIRMADO;
+    }
+
+    public void cancelAgendamento(){
+        this.status = StatusAgendamento.CANCELADO;
+    }
+
 }

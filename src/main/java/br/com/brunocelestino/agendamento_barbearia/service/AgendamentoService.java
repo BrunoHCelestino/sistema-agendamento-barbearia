@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -57,4 +58,44 @@ public class AgendamentoService {
 
     }
 
+    public void confirmAgendamento(UUID agendamentoId) {
+        Agendamento agendamento = agendamentoRepository.findById(agendamentoId).orElseThrow();
+
+        if (agendamento.getStatus().equals(StatusAgendamento.CONFIRMADO))
+            throw new RuntimeException("Esse agendamento já está confirmado!");
+
+        if (agendamento.getStatus().equals(StatusAgendamento.CONCLUIDO))
+            throw new RuntimeException("Esse agendamento já foi concluído.");
+
+        if (agendamento.getStatus().equals(StatusAgendamento.CANCELADO))
+            throw new RuntimeException("Esse agendamento foi cancelado. É necessário realizar outro agendamento.");
+
+        if (agendamento.getStatus().equals(StatusAgendamento.NAO_COMPARECEU))
+            throw new RuntimeException("O cliente não compareceu ao agendamento.");
+
+
+        agendamento.confirmAgendamento();
+        agendamentoRepository.save(agendamento);
+
+    }
+
+    public void cancelAgendamento(UUID agendamentoId){
+        Agendamento agendamento = agendamentoRepository.findById(agendamentoId).orElseThrow();
+
+        if (agendamento.getDataHoraInicio().isAfter(LocalDateTime.now().minusHours(2)))
+            throw new RuntimeException("Só é possível fazer cancelamento com 2 horas de antecedência.");
+
+        if (agendamento.getDataHoraInicio().isBefore(LocalDateTime.now().minusHours(2))){
+            if (agendamento.getStatus().equals(StatusAgendamento.CONCLUIDO))
+                throw new RuntimeException("Esse agendamento já foi concluído.");
+
+            if (agendamento.getStatus().equals(StatusAgendamento.CANCELADO))
+                throw new RuntimeException("Esse agendamento já está cancelado.");
+
+            if (agendamento.getStatus().equals(StatusAgendamento.NAO_COMPARECEU))
+                throw new RuntimeException("O cliente não compareceu ao agendamento. Não é necessário cancelar!");
+            agendamento.cancelAgendamento();
+            agendamentoRepository.save(agendamento);
+        }
+    }
 }
