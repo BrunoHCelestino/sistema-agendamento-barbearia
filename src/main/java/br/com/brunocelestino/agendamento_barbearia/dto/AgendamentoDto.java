@@ -1,21 +1,16 @@
 package br.com.brunocelestino.agendamento_barbearia.dto;
 
-import br.com.brunocelestino.agendamento_barbearia.data.entity.Barbeiro;
-import br.com.brunocelestino.agendamento_barbearia.data.entity.Cliente;
-import br.com.brunocelestino.agendamento_barbearia.data.entity.Servico;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
-@AllArgsConstructor
-@Builder
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class AgendamentoDto {
 
     private LocalDateTime dataHoraInicio;

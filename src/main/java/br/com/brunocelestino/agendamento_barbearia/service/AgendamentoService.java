@@ -10,7 +10,10 @@ import br.com.brunocelestino.agendamento_barbearia.data.repository.BarbeiroRepos
 import br.com.brunocelestino.agendamento_barbearia.data.repository.ClienteRepository;
 import br.com.brunocelestino.agendamento_barbearia.data.repository.ServicoRepository;
 import br.com.brunocelestino.agendamento_barbearia.dto.AgendamentoDto;
+import br.com.brunocelestino.agendamento_barbearia.dto.AgendamentoResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,6 +27,16 @@ public class AgendamentoService {
     private final ClienteRepository clienteRepository;
     private final BarbeiroRepository barbeiroRepository;
     private final ServicoRepository servicoRepository;
+
+    public Page<AgendamentoResponseDto> findAllAgendamentos(Pageable page) {
+        Page<Agendamento> agendamentos = agendamentoRepository.findAll(page);
+        return agendamentoReponseDtoBuilder(agendamentos);
+    }
+
+    public Page<AgendamentoResponseDto> findAgendamentosByCliente(UUID clienteId, Pageable page) {
+        Page<Agendamento> agendamentos = agendamentoRepository.findAllByCliente(clienteId, page);
+        return agendamentoReponseDtoBuilder(agendamentos);
+    }
 
     public void createAgendamento(AgendamentoDto agendamentoDto){
 
@@ -97,5 +110,17 @@ public class AgendamentoService {
             agendamento.cancelAgendamento();
             agendamentoRepository.save(agendamento);
         }
+    }
+
+    private Page<AgendamentoResponseDto> agendamentoReponseDtoBuilder(Page<Agendamento> agendamentos){
+        return agendamentos.map(agendamento ->
+                new AgendamentoResponseDto(
+                        agendamento.getCliente().getNome(),
+                        agendamento.getBarbeiro().getNome(),
+                        agendamento.getServico().getNome(),
+                        agendamento.getDataHoraInicio(),
+                        agendamento.getDataHoraFim(),
+                        agendamento.getObservacao(),
+                        agendamento.getPrecoCobrado()));
     }
 }
